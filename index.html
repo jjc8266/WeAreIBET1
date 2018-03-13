@@ -22,9 +22,9 @@
 				</div>
 				<div id="main">
 					<h2>Deer Density Calculator</h2>
-					map goes here
+					<p>map goes here
 					</br>
-					optional manual entering goes here
+					<p>optional manual entering goes here
 					
 				</div>
 				<div id="map"></div>
@@ -51,9 +51,87 @@
 
 						}
 					</script>
+					
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALA8k5zKL7q7r4Gl3wKn8-U4OcxmpOFzw&callback=initMap"
 					async defer></script>
+					
+					<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+					
+					<script>
+						// Initialize Firebase
+						var config = {
+						apiKey: "AIzaSyDThiTB1RYkYrlv3rT_3T7deNPQzw50PBE",
+						authDomain: "ibet-project.firebaseapp.com",
+						databaseURL: "https://ibet-project.firebaseio.com",
+						projectId: "ibet-project",
+						storageBucket: "",
+						messagingSenderId: "444386494334"
+						};
+						firebase.initializeApp(config);
+					</script>
+					
 
+					<input type="file" onchange="previewFile()"><br>
+					<img src="" height="200" alt="Image preview...">
+					
+					<script>
+					
+					function previewFile(){
+       					var preview = document.querySelector('img'); //selects the query named img
+       					var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       					var reader  = new FileReader();
+
+      					reader.onloadend = function () {
+    			    	preview.src = reader.result;
+   				    	}
+
+			      		if (file) {
+           					reader.readAsDataURL(file); //reads the data as a URL
+       					} else {
+           					preview.src = "";
+   	    				}
+  					}
+
+  					previewFile();  //calls the function named previewFile()
+
+
+  					function imagePath() {
+
+  					}
+
+  					function imageName(){
+  						
+  					}
+
+					-(RXPromise *) uploadFile:(NSData *)file withName: (NSString *) name mimeType: (NSString *) mimeType {
+        
+						FIRStorage * storage = [FIRStorage storage];
+						FIRStorageReference * ref = [storage referenceForURL: [BSettingsManager firebaseStoragePath]];
+						FIRStorageReference * filesRef = [ref child:bStorageBucket];
+						NSString * fullName = [NSString stringWithFormat:@"%@_%@", [BCoreUtilities getUUID], name];
+						FIRStorageReference * fileRef = [filesRef child:fullName];
+						RXPromise * promise = [RXPromise new];
+        
+						FIRStorageUploadTask * uploadTask = [fileRef putData:file metadata:Nil completion:^(FIRStorageMetadata * meta, NSError * error) {
+							if (!error) {
+								[fileRef downloadURLWithCompletion:^(NSURL * url, NSError * error) {
+									if (!error) {
+										[promise resolveWithResult:@{bFileName: fullName, bFilePath: url.absoluteString}];
+									}
+									else {
+										[promise  rejectWithReason:error];
+									}
+								}];
+							}
+							else {
+								[promise rejectWithReason:error];
+							}
+						}];
+						return promise;
+					}
+
+					</script>
+				
 				<div id="footer">
 					Copyright &copy; 2018 Jacob Consalvi, Alex Talamonti, Varun Vejalla
 				</div>
