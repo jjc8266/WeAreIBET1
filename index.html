@@ -1,139 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css"> <!--Links the website to the style.css document for web layout-->
+	<title>WeAreIBET1</title> <!--Sets website title name-->
+	<script src="upload.js"></script> <!--Links the upload.js script file to the html in order to call functions in said file-->
 
 
-	<title>WeAreIBET1</title>
 </head>
 <body>
 	<div id="container">
 			<div id="header">
-					<h1>Deer Support Vector Machine</h1>
+					<h1>Deer Support Vector Machine</h1> <!--Sets the Header1 Name-->
 			</div>
 
 			<div id="content">
 				<div id="nav">
 					<ul>
-						<li class="page"><a href="" >Home</a></li>
+						<li class="page"><a href="" >Home</a></li> <!--Links the different pages of the website from this one page-->
 						<li><a href="about.html">About</a></li>
 						<li><a href="Credits.html">Credits</a></li>
 					</ul>
 				</div>
 				<div id="main">
+					<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js">	//Links firebase to script so u can call its functions			
+					service firebase.storage {
+ 						match /b/{bucket}/o {
+					    match /{allPaths=**} {
+    						allow read, write;
+    						}
+  						}
+					}
+
+					// Initialize Firebase
+					var config = { //configures our firebase for where images will be uploaded
+					    apiKey: "AIzaSyDThiTB1RYkYrlv3rT_3T7deNPQzw50PBE", //Api key for firebase
+					    authDomain: "ibet-project.firebaseapp.com", //Domain of our firebase
+					    databaseURL: "https://ibet-project.firebaseio.com", //url of our firebase
+ 						storageBucket: "gs://ibet-project.appspot.com", //Bucket of our firebase
+					};
+						firebase.initializeApp(config);
+					</script>
+
+					
 					<h2>Deer Density Calculator</h2>
-					<p>map goes here
-					</br>
-					<p>optional manual entering goes here
+		<!--			<p>map goes here
+						</br>
+						<p>optional manual entering goes here -->
+					<input id="f" type="file" />
+					<img id="i" />
+
+					<br/>	
 					
 				</div>
-				<div id="map"></div>
+				<div id="map"></div> <!--This div is specific to hold the map-->
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALA8k5zKL7q7r4Gl3wKn8-U4OcxmpOFzw&callback=initMap"
+					async defer></script> <!--URL contained in the script tag is the location of a JavaScript file that loads all of the symbols and definitions you need for using the Maps JavaScript API. Async lets rest of file render while map renders-->
+
 					<script>
-						var map;
-						function initMap() {
-							var myLatlng = {lat: -25.363, lng: 131.044},
-							map = new google.maps.Map(document.getElementById('map'), {
-								center: myLatlng,
-								mapTypeID: 'satellite',
-								zoom: 0
+						var map; //Makes variable called map
+						function initMap() { //Creates function that initializes map
+							var myLatlng = {lat: -25.363, lng: 131.044}, //Sets the links of the 
+							map = new google.maps.Map(document.getElementById('map'), { //makes a map object
+								center: myLatlng, //where the api centers the map
+								mapTypeID: 'satellite', 
+								zoom: 1.5 //Lowest zoom, views the entire Earth
 								});
-
-							google.maps.event.addListener(map, 'click', function(event) {
-								placeMarker(event.latLng);
+							google.maps.event.addListener(map, 'click', function(event) { //listens for user click
+								placeMarker(event.latLng); //calls placemarker function 
 							});
-
 							function placeMarker(location) {	
-    							var marker = new google.maps.Marker({
-        						position: location, 
+    							var marker = new google.maps.Marker({ //google marker is set in variable marker
+        						position: location, //marker's position is the location from the variable event.latLng
         						map: map
 							    });
 							}
-
 						}
-					</script>
-					
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALA8k5zKL7q7r4Gl3wKn8-U4OcxmpOFzw&callback=initMap"
-					async defer></script>
-					
-					<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-					
-					<script>
-						// Initialize Firebase
-						var config = {
-						apiKey: "AIzaSyDThiTB1RYkYrlv3rT_3T7deNPQzw50PBE",
-						authDomain: "ibet-project.firebaseapp.com",
-						databaseURL: "https://ibet-project.firebaseio.com",
-						projectId: "ibet-project",
-						storageBucket: "",
-						messagingSenderId: "444386494334"
-						};
-						firebase.initializeApp(config);
-					</script>
-					
-
-					<input type="file" onchange="previewFile()"><br>
-					<img src="" height="200" alt="Image preview...">
-					
-					<script>
-					
-					function previewFile(){
-       					var preview = document.querySelector('img'); //selects the query named img
-       					var file    = document.querySelector('input[type=file]').files[0]; //sames as here
-       					var reader  = new FileReader();
-
-      					reader.onloadend = function () {
-    			    	preview.src = reader.result;
-   				    	}
-
-			      		if (file) {
-           					reader.readAsDataURL(file); //reads the data as a URL
-       					} else {
-           					preview.src = "";
-   	    				}
-  					}
-
-  					previewFile();  //calls the function named previewFile()
-
-
-  					function imagePath() {
-
-  					}
-
-  					function imageName(){
-  						
-  					}
-
-					-(RXPromise *) uploadFile:(NSData *)file withName: (NSString *) name mimeType: (NSString *) mimeType {
-        
-						FIRStorage * storage = [FIRStorage storage];
-						FIRStorageReference * ref = [storage referenceForURL: [BSettingsManager firebaseStoragePath]];
-						FIRStorageReference * filesRef = [ref child:bStorageBucket];
-						NSString * fullName = [NSString stringWithFormat:@"%@_%@", [BCoreUtilities getUUID], name];
-						FIRStorageReference * fileRef = [filesRef child:fullName];
-						RXPromise * promise = [RXPromise new];
-        
-						FIRStorageUploadTask * uploadTask = [fileRef putData:file metadata:Nil completion:^(FIRStorageMetadata * meta, NSError * error) {
-							if (!error) {
-								[fileRef downloadURLWithCompletion:^(NSURL * url, NSError * error) {
-									if (!error) {
-										[promise resolveWithResult:@{bFileName: fullName, bFilePath: url.absoluteString}];
-									}
-									else {
-										[promise  rejectWithReason:error];
-									}
-								}];
-							}
-							else {
-								[promise rejectWithReason:error];
-							}
-						}];
-						return promise;
-					}
-
 					</script>
 				
 				<div id="footer">
-					Copyright &copy; 2018 Jacob Consalvi, Alex Talamonti, Varun Vejalla
+					Copyright &copy; 2018 Jacob Consalvi, Alex Talamonti, Varun Vejalla <!--Sets copyright names-->
 				</div>
 			</div>
 	</div>
