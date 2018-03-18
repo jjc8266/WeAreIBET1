@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css"> <!--Links the website to the style.css document for web layout-->
+	<title>Plot Coordinates</title> <!--Sets website title name-->
+
+
+</head>
+<body>
+	<div id="container">
+			<div id="header">
+					<h1>Mason Neck Plot Coordinates</h1> <!--Sets the Header1 Name-->
+			</div>
+
+			<div id="content">
+				<div id="masonNeck">
+					
+				</div>
+				<div id="map"></div> <!--This div is specific to hold the map-->
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALA8k5zKL7q7r4Gl3wKn8-U4OcxmpOFzw&callback=initMap"
+					async defer></script> <!--URL contained in the script tag is the location of a JavaScript file that loads all of the symbols and definitions you need for using the Maps JavaScript API. Async lets rest of file render while map renders-->
+
+					<script>
+
+						// This example adds a user-editable rectangle to the map.
+     					// When the user changes the bounds of the rectangle,
+    					// an info window pops up displaying the new bounds.
+
+	    				var map;
+    					var infoWindow;
+
+    					function initMap() {
+      						map = new google.maps.Map(document.getElementById('map'), {
+        						center: {lat: 38.6483, lng: -77.1665},
+        						zoom: 13,
+        						mapTypeID: 'satellite'
+        					});
+							
+							function placeMarker(location) {	
+    							var marker = new google.maps.Marker({
+        						position: location, 
+        						map: map
+							    });
+							}
+
+							placeMarker({lat: 38.6344421, lng: -77.1971084 });
+							placeMarker({lat: 38.6341685, lng: -77.1968884 });
+							placeMarker({lat: 38.6339861, lng: -77.1967060 });
+							placeMarker({lat: 38.6339863, lng: -77.1967069 });
+							placeMarker({lat: 38.6334926, lng: -77.1962554 });
+							placeMarker({lat: 38.6334604, lng: -77.1962179 }); //Start this from plot 6
+							placeMarker({lat: 38.6329615, lng: -77.1957190 });
+							placeMarker({lat: 38.6329615, lng: -77.1957190 }); //7 and 8 are the same coordinates
+							placeMarker({lat: 38.6324143, lng: -77.1951879 });
+							placeMarker({lat: 38.6323982, lng: -77.1951879 }); 
+							
+							placeMarker({lat: 38.6317062, lng: -77.1945495 }); //Plot 11
+							placeMarker({lat: 38.6316580, lng: -77.1945012 });
+							placeMarker({lat: 38.6311215, lng: -77.1940024 });
+							placeMarker({lat: 38.6311322, lng: -77.1940024 });
+							placeMarker({lat: 38.6304885, lng: -77.1933264 });
+							placeMarker({lat: 38.6304832, lng: -77.1933103 });
+							placeMarker({lat: 38.6300111, lng: -77.1929348 });
+							placeMarker({lat: 38.6299628, lng: -77.1928866 });
+							placeMarker({lat: 38.6283267, lng: -77.1914382 });
+							placeMarker({lat: 38.6283052, lng: -77.1914060 });
+
+							placeMarker({lat: 38.6278330, lng: -77.1909554 }); //Plot 21
+							placeMarker({lat: 38.6277634, lng: -77.1908856 });
+							placeMarker({lat: 38.6265671, lng: -77.1898557 });
+							placeMarker({lat: 38.6265296, lng: -77.1898235 });
+							placeMarker({lat: 38.6256713, lng: -77.1889276 });
+							placeMarker({lat: 38.6256176, lng: -77.1889062 });
+							placeMarker({lat: 38.6250865, lng: -77.1884877 });
+							placeMarker({lat: 38.6250758, lng: -77.1884877 });
+							placeMarker({lat: 38.6244106, lng: -77.1879620 });
+							placeMarker({lat: 38.6243945, lng: -77.1879459 });
+
+							placeMarker({lat: 38.6226243, lng: -77.1876026 }); //Plot 31
+							placeMarker({lat: 38.6226189, lng: -77.1874846 });
+							placeMarker({lat: 38.6226189, lng: -77.1868569 });
+							placeMarker({lat: 38.6226135, lng: -77.1867336 });
+							placeMarker({lat: 38.6225921, lng: -77.1859665 });
+							placeMarker({lat: 38.6222970, lng: -77.1888203 });
+							placeMarker({lat: 38.6220181, lng: -77.1893460 });
+							placeMarker({lat: 38.6217445, lng: -77.1897913 });
+							placeMarker({lat: 38.6212510, lng: -77.1905423 });
+							placeMarker({lat: 38.6211169, lng: -77.1908105 });
+							
+
+							placeMarker({lat: 38.6405951, lng: -77.1689398 }); //Plot 41
+							placeMarker({lat: 38.6403751, lng: -77.1687842 });
+							placeMarker({lat: 38.6395651, lng: -77.1686769 });
+							placeMarker({lat: 38.6393237, lng: -77.1684087 });
+							placeMarker({lat: 38.6380148, lng: -77.1690095 });
+							placeMarker({lat: 38.6379880, lng: -77.1690364 });
+							placeMarker({lat: 38.6371404, lng: -77.1700449 });
+							placeMarker({lat: 38.6371297, lng: -77.1700663 });
+							placeMarker({lat: 38.6366200, lng: -77.1709622 });
+							placeMarker({lat: 38.6365932, lng: -77.1710158 });
+
+							placeMarker({lat: 38.6364108, lng: -77.1713591 }); //Plot 51
+							placeMarker({lat: 38.6363518, lng: -77.1714503 });
+							placeMarker({lat: 38.6358476, lng: -77.1723194 });
+							placeMarker({lat: 38.6358529, lng: -77.1723247 });
+							placeMarker({lat: 38.6356705, lng: -77.1726734 });
+							placeMarker({lat: 38.6356330, lng: -77.1727807 });
+							placeMarker({lat: 38.6352199, lng: -77.1744544 });
+							placeMarker({lat: 38.6351717, lng: -77.1745402 });
+							placeMarker({lat: 38.6339486, lng: -77.1741862 });
+							placeMarker({lat: 38.6338735, lng: -77.1741969 });
+
+							placeMarker({lat: 38.6332780, lng: -77.1741486 }); //Plot 61
+							placeMarker({lat: 38.6331654, lng: -77.1741433 });
+							placeMarker({lat: 38.6328650, lng: -77.1739180 });
+							placeMarker({lat: 38.6328059, lng: -77.1738643 });
+							placeMarker({lat: 38.6323875, lng: -77.1734513 });
+							placeMarker({lat: 38.6322910, lng: -77.1734191 });
+							placeMarker({lat: 38.6318940, lng: -77.1733601 });
+							placeMarker({lat: 38.6318135, lng: -77.1733547 });
+							placeMarker({lat: 38.6310571, lng: -77.1724803 });
+							placeMarker({lat: 38.6305475, lng: -77.1725876 });
+
+							placeMarker({lat: 38.6311913, lng: -77.1734942 }); //Plot 71
+							placeMarker({lat: 38.6308265, lng: -77.1737570 });
+							placeMarker({lat: 38.6308211, lng: -77.1738321 });
+							placeMarker({lat: 38.6301559, lng: -77.1736766 });
+							placeMarker({lat: 38.6296141, lng: -77.1737195 });
+							placeMarker({lat: 38.6294478, lng: -77.1737409 });
+							placeMarker({lat: 38.6266530, lng: -77.1720351 });
+							placeMarker({lat: 38.6265939, lng: -77.1719707 });
+							placeMarker({lat: 38.6264759, lng: -77.1708227 });
+							placeMarker({lat: 38.6265349, lng: -77.1705438 });
+
+
+
+	    					}
+
+    					
+    					
+
+
+						
+					</script>
+					
+				<div id="footer">
+					Copyright &copy; 2018 Jacob Consalvi, Alex Talamonti, Varun Vejalla <!--Sets copyright names-->
+				</div>
+			</div>
+	</div>
+
+	
+</body>
+</html>
