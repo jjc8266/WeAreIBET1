@@ -3,7 +3,6 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css"> <!--Links the website to the style.css document for web layout-->
 	<title>WeAreIBET1</title> <!--Sets website title name-->
-	<script src="upload.js"></script> <!--Links the upload.js script file to the html in order to call functions in said file-->
 
 
 </head>
@@ -22,33 +21,11 @@
 					</ul>
 				</div>
 				<div id="main">
-					<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js">	//Links firebase to script so u can call its functions			
-					service firebase.storage {
- 						match /b/{bucket}/o {
-					    match /{allPaths=**} {
-    						allow read, write;
-    						}
-  						}
-					}
-
-					// Initialize Firebase
-					var config = { //configures our firebase for where images will be uploaded
-					    apiKey: "AIzaSyDThiTB1RYkYrlv3rT_3T7deNPQzw50PBE", //Api key for firebase
-					    authDomain: "ibet-project.firebaseapp.com", //Domain of our firebase
-					    databaseURL: "https://ibet-project.firebaseio.com", //url of our firebase
- 						storageBucket: "gs://ibet-project.appspot.com", //Bucket of our firebase
-					};
-						firebase.initializeApp(config);
-					</script>
 
 					
 					<h2>Deer Density Calculator</h2>
-		<!--			<p>map goes here
-						</br>
-						<p>optional manual entering goes here -->
-					<input id="f" type="file" />
-					<img id="i" />
-
+						<p> Choose 2 spots on the map!
+						<p> These spots will be used to calculate the deer population in a rectangular area.
 					<br/>	
 					
 				</div>
@@ -57,26 +34,64 @@
 					async defer></script> <!--URL contained in the script tag is the location of a JavaScript file that loads all of the symbols and definitions you need for using the Maps JavaScript API. Async lets rest of file render while map renders-->
 
 					<script>
-						var map; //Makes variable called map
-						function initMap() { //Creates function that initializes map
-							var myLatlng = {lat: -25.363, lng: 131.044}, //Sets the links of the 
-							map = new google.maps.Map(document.getElementById('map'), { //makes a map object
-								center: myLatlng, //where the api centers the map
-								mapTypeID: 'satellite', 
-								zoom: 1.5 //Lowest zoom, views the entire Earth
-								});
-							google.maps.event.addListener(map, 'click', function(event) { //listens for user click
-								placeMarker(event.latLng); //calls placemarker function 
-							});
-							function placeMarker(location) {	
-    							var marker = new google.maps.Marker({ //google marker is set in variable marker
-        						position: location, //marker's position is the location from the variable event.latLng
-        						map: map
-							    });
-							}
-						}
+
+						 // This example adds a user-editable rectangle to the map.
+      // When the user changes the bounds of the rectangle,
+      // an info window pops up displaying the new bounds.
+
+      var rectangle;
+      var map;
+      var infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 44.5452, lng: -78.5389},
+          zoom: 2,
+          mapTypeID: 'satellite'
+        });
+
+        var bounds = {
+          north: 44.599,
+          south: 44.490,
+          east: -78.443,
+          west: -78.649
+        };
+
+        // Define the rectangle and set its editable property to true.
+        rectangle = new google.maps.Rectangle({
+          bounds: bounds,
+          editable: true,
+          draggable: true
+        });
+
+        rectangle.setMap(map);
+
+        // Add an event listener on the rectangle.
+        rectangle.addListener('bounds_changed', showNewRect);
+
+        // Define an info window on the map.
+        infoWindow = new google.maps.InfoWindow();
+      }
+      // Show the new coordinates for the rectangle in an info window.
+
+      /** @this {google.maps.Rectangle} */
+      function showNewRect(event) {
+        var ne = rectangle.getBounds().getNorthEast();
+        var sw = rectangle.getBounds().getSouthWest();
+
+        var contentString = '<b>Rectangle moved.</b><br>' +
+            'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+            'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
+
+        // Set the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(ne);
+
+        infoWindow.open(map);
+      }	
+						
 					</script>
-				
+					
 				<div id="footer">
 					Copyright &copy; 2018 Jacob Consalvi, Alex Talamonti, Varun Vejalla <!--Sets copyright names-->
 				</div>
@@ -86,3 +101,22 @@
 	
 </body>
 </html>
+
+<!-- 
+							google.maps.event.addListener(map, 'click', function(event) { //listens for user click
+								placeMarker(event.latLng); //calls placemarker function 
+							});
+							
+
+							function placeMarker(location) {	
+    							if (i < 2) { //limits the markers to only 2
+									var marker = new google.maps.Marker({ //google marker is set in variable marker
+        							position: location, //marker's position is the location from the variable event.latLng
+        							map: map
+								    });
+								    i++;
+    							}
+
+
+
+-->
